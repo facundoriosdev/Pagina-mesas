@@ -1,0 +1,17 @@
+# Dependencias
+node_modules/
+
+# Logs (evita subir los archivos de error que te generó npm antes)
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de entorno y credenciales (por seguridad, si los agregás más adelante)
+.env
+.env.local
+
+# Archivos del sistema operativo (evita subir basura de Windows o Mac)
+.DS_Store
+Thumbs.db
