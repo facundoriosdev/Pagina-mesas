@@ -1,0 +1,40 @@
+body{
+    margin: 0;
+    font-family: Arial;
+}
+.navbar-text{
+    font-size: 20px;
+}
+.navbar{
+    background-color: #0066ff;
+    color: white;
+}
+.navbar a{
+    color: white;
+    text-decoration: none;
+}
+.navbar-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 24px;
+}
+.navbar-content{
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+}
+.navbar-buttons{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.btn-nav{
+   border: 1px solid white;
+   border-radius: 6px;
+   padding: 8px 12px;
+}
+.btn-nav:hover{
+    background-color: white;
+    color: #277dff;
+}
