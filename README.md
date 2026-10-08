@@ -22,7 +22,7 @@ npm install
 
 Para iniciar el servidor local de desarrollo, ejecutar:
 
-npm start
+npx serve
 
 ---
 
