@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charlas y Mapa - Autoridades de Mesa</title>
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/card.css">
+    <link rel="stylesheet" href="styles/map.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-content">
+                <img src="resources/eleccion.png" alt="urna" width="40" height="40" class="navbar-logo">
+                <span class="navbar-text">Autoridades de Mesa</span>
+            </a>
+            <div class="navbar-buttons">
+                <a href="#" class="btn-nav">Iniciar Sesión</a>
+                <a href="#" class="btn-nav">Registrarse</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="card map-card">
+            <div class="card-conteiner">
+                <div class="card-header">
+                    <h2>SEDES DE CHARLAS DE ORIENTACIÓN</h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-text-muted" style="margin-top: 20px; padding: 0 20px;">
+                        Consulte las ubicaciones y horarios de las próximas charlas de orientación para autoridades de
+                        mesa. Seleccione una sede en la lista para ubicarla en el mapa.
+                    </p>
+
+                    <div class="map-layout">
+                        <div class="charlas-list">
+                            <!-- lista de charlas -->
+                            <div class="charla-item" onclick="focusMap(-34.6037, -58.3816)">
+                                <h3>Sede Central CABA</h3>
+                                <p><strong>Tema:</strong> Funciones y Deberes</p>
+                                <p><strong>Fecha:</strong> 15 de Octubre - 10:00 hs</p>
+                                <p><strong>Dirección:</strong> Av. de Mayo 825</p>
+                            </div>
+                            <div class="charla-item" onclick="focusMap(-34.5221, -58.7001)">
+                                <h3>Sede UNGS - Los Polvorines</h3>
+                                <p><strong>Tema:</strong> Capacitación General</p>
+                                <p><strong>Fecha:</strong> 18 de Octubre - 14:00 hs</p>
+                                <p><strong>Dirección:</strong> Juan María Gutiérrez 1150</p>
+                            </div>
+                            <div class="charla-item" onclick="focusMap(-34.6095, -58.4116)">
+                                <h3>Sede Once</h3>
+                                <p><strong>Tema:</strong> Proceso de Escrutinio</p>
+                                <p><strong>Fecha:</strong> 20 de Octubre - 16:00 hs</p>
+                                <p><strong>Dirección:</strong> Av. Rivadavia 2800</p>
+                            </div>
+                            <div class="charla-item" onclick="focusMap(-34.5684, -58.5254)">
+                                <h3>Sede Villa Maipú</h3>
+                                <p><strong>Tema:</strong> Capacitación Avanzada</p>
+                                <p><strong>Fecha:</strong> 7 de Octubre - 11:00 hs</p>
+                                <p><strong>Dirección:</strong> Av. Maipú 3300</p>
+                            </div>
+                        </div>
+                        <div class="map-container">
+                            <div id="map"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <script>
+        // centro arbitrario
+        var map = L.map('map').setView([-34.56, -58.54], 10);
+
+        // no se muy bien como funciona esto pero hace que Leaflet funcione
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+            maxZoom: 19,
+            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+        }).addTo(map);
+
+        // array de sedes para poder marcarlas en el mapa facilmente
+        var sedes = [
+            {
+                nombre: "Sede Central CABA",
+                fecha: "15 de Octubre - 10:00 hs",
+                direccion: "Av. de Mayo 825, CABA",
+                lat: -34.6037,
+                lng: -58.3816
+            },
+            {
+                nombre: "Sede UNGS - Los Polvorines",
+                fecha: "18 de Octubre - 14:00 hs",
+                direccion: "Juan María Gutiérrez 1150, Los Polvorines",
+                lat: -34.5221,
+                lng: -58.7001
+            },
+            {
+                nombre: "Sede Once",
+                fecha: "20 de Octubre - 16:00 hs",
+                direccion: "Av. Rivadavia 2800, CABA",
+                lat: -34.6095,
+                lng: -58.4116
+            },
+            {
+                nombre: "Sede Villa Maipú",
+                fecha: "7 de Octubre - 11:00 hs",
+                direccion: "Av. Maipú 3300, Villa Maipu",
+                lat: -34.5684,
+                lng: -58.5254
+            }
+        ];
+
+        // marcadores
+        sedes.forEach(function (sede) {
+            var marker = L.marker([sede.lat, sede.lng]).addTo(map);
+            marker.bindPopup("<b>" + sede.nombre + "</b><br>" + sede.direccion + "<br>" + sede.fecha);
+        });
+
+        // función para enfocar el mapa al hacer clic en un item de la lista
+        function focusMap(lat, lng) {
+            map.flyTo([lat, lng], 14, {
+                animate: true,
+                duration: 1.5
+            });
+        }
+    </script>
+</body>
+
+</html>
