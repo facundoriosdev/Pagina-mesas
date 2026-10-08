@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Elecciones Nacionales</title>
+    <link rel="stylesheet" href="src/styles/navbar.css">
+    <link rel="stylesheet" href="src/styles/card.css">
+    <link rel="stylesheet" href="src/styles/form.css">
+    <link rel="stylesheet" href="src/styles/admin.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-content">
+                <img src="src/resources/eleccion.png" alt="urna" width="40" height="40" class="navbar-logo">
+                <span class="navbar-text">Autoridades de Mesa</span>
+            </a>
+            <div class="navbar-buttons">
+                <a href="index.html" class="btn-nav">Inicio</a>
+                <a href="charlas.html" class="btn-nav">Ver Charlas</a>
+                <a href="inscripcion.html" class="btn-nav">Inscripción</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="admin-main-container">
+
+        <section class="admin-box">
+            <div class="admin-box-header">
+                <h2>EVALUACIÓN DE SOLICITUDES DE POSTULANTES</h2>
+            </div>
+            <div class="admin-content table-container">
+                <table class="solicitudes-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Postulante</th>
+                            <th>DNI</th>
+                            <th>Distrito</th>
+                            <th>Capacitación</th>
+                            <th>Agrupación</th> <!-- NUEVA COLUMNA -->
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-solicitudes">
+                        <!-- Las filas se cargan desde main.js -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="admin-box">
+            <div class="admin-box-header">
+                <h2>REGISTRAR NUEVA CHARLA Y SEDE</h2>
+            </div>
+            <div class="admin-content">
+                <div id="alerta-charla" class="alerta-feedback"></div>
+
+                <div class="admin-charla-grid">
+                    <form id="form-nueva-charla" class="inscripcion-form" style="padding: 0; gap: 12px;">
+                        <div class="form-group">
+                            <label for="charla-nombre">Nombre de la Charla *</label>
+                            <input type="text" id="charla-nombre" placeholder="Ej: Capacitación General de Mesa" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="charla-tema">Tema Principal *</label>
+                            <input type="text" id="charla-tema" placeholder="Ej: Escrutinio y Cierre" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="charla-fecha">Fecha *</label>
+                                <input type="date" id="charla-fecha" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="charla-horario">Horario *</label>
+                                <input type="time" id="charla-horario" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sede-nombre">Nombre de la Sede *</label>
+                            <input type="text" id="sede-nombre" placeholder="Ej: Campus UNGS" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sede-direccion">Dirección *</label>
+                            <input type="text" id="sede-direccion" placeholder="Ej: Juan María Gutiérrez 1150" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="sede-lat">Latitud *</label>
+                                <input type="number" step="any" id="sede-lat" placeholder="-34.5221" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="sede-lng">Longitud *</label>
+                                <input type="number" step="any" id="sede-lng" placeholder="-58.7001" required>
+                            </div>
+                        </div>
+
+                        <small style="color: #666; font-size: 12px;">
+                            💡 Podés hacer clic en el mapa de la derecha para autocompletar la latitud y longitud.
+                        </small>
+
+                        <button type="submit" class="btn-submit" style="margin-top: 10px;">Guardar y Publicar en Mapa</button>
+                    </form>
+
+                    <div id="mapa-admin"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <script type="module" src="src/js/vista/main.js"></script>
+</body>
+
+</html>

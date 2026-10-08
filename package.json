@@ -1,14 +1,9 @@
 {
-  "name": "Autoridades_Mesa",
+  "name": "portal-autoridades",
   "version": "1.0.0",
-  "description": "",
-  "main": "src/app.js",
+  "description": "Backend en JavaScript puro y Frontend con Fetch",
+  "main": "server.js",
   "scripts": {
-    "start": "node src/app.js",
-    "dev": "node --watch src/app.js"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.22.3"
+    "start": "node server.js"
   }
 }

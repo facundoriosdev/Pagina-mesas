@@ -5,21 +5,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscripción - Autoridades de Mesa</title>
-    <link rel="stylesheet" href="styles/navbar.css">
-    <link rel="stylesheet" href="styles/card.css">
-    <link rel="stylesheet" href="styles/form.css">
+    <link rel="stylesheet" href="src/styles/navbar.css">
+    <link rel="stylesheet" href="src/styles/card.css">
+    <link rel="stylesheet" href="src/styles/form.css">
+    <style>
+        .alerta-feedback {
+            padding: 12px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            margin: 15px 40px 0 40px;
+            display: none;
+        }
+        .alerta-exito {
+            background-color: #d1e7dd;
+            color: #0f5132;
+            border: 1px solid #badbcc;
+        }
+        .alerta-error {
+            background-color: #f8d7da;
+            color: #842029;
+            border: 1px solid #f5c2c7;
+        }
+    </style>
 </head>
 
 <body>
     <nav class="navbar">
         <div class="navbar-container">
             <a href="index.html" class="navbar-content">
-                <img src="resources/eleccion.png" alt="urna" width="40" height="40" class="navbar-logo">
+                <img src="src/resources/eleccion.png" alt="urna" width="40" height="40" class="navbar-logo">
                 <span class="navbar-text">Autoridades de Mesa</span>
             </a>
             <div class="navbar-buttons">
-                <a href="#" class="btn-nav">Iniciar Sesión</a>
-                <a href="#" class="btn-nav">Registrarse</a>
+                <a href="charlas.html" class="btn-nav">Ver Charlas</a>
+                <a href="admin.html" class="btn-nav">Panel Administrador</a>
             </div>
         </div>
     </nav>
@@ -31,8 +50,9 @@
                     <h2>FORMULARIO DE INSCRIPCIÓN</h2>
                 </div>
                 <div class="card-body">
-                    <form action="#" method="POST" class="inscripcion-form">
+                    <div id="mensaje-feedback" class="alerta-feedback"></div>
 
+                    <form id="form-inscripcion" class="inscripcion-form">
                         <fieldset>
                             <legend>Datos Personales</legend>
                             <div class="form-row">
@@ -110,10 +130,8 @@
                             <div class="form-group">
                                 <label>¿Pertenece a una agrupación política? *</label>
                                 <div class="radio-group">
-                                    <label><input type="radio" name="agrupacion" value="si" id="agrupacion-si" required
-                                            onchange="togglePartido()"> Sí</label>
-                                    <label><input type="radio" name="agrupacion" value="no" id="agrupacion-no" required
-                                            onchange="togglePartido()"> No</label>
+                                    <label><input type="radio" name="agrupacion" value="si" id="agrupacion-si" required> Sí</label>
+                                    <label><input type="radio" name="agrupacion" value="no" id="agrupacion-no" required> No</label>
                                 </div>
                             </div>
 
@@ -127,8 +145,7 @@
                             <legend>Charlas de Orientación</legend>
                             <div class="checkbox-group">
                                 <input type="checkbox" id="interes_charlas" name="interes_charlas" value="si">
-                                <label for="interes_charlas">Tengo interés en participar en charlas de
-                                    orientación</label>
+                                <label for="interes_charlas">Tengo interés en participar en charlas de orientación</label>
                             </div>
                         </fieldset>
 
@@ -139,23 +156,7 @@
         </div>
     </main>
 
-    <script>
-
-        function togglePartido() {
-            var agrupacionSi = document.getElementById('agrupacion-si').checked;
-            var partidoGroup = document.getElementById('partido-group');
-            var partidoInput = document.getElementById('partido');
-
-            if (agrupacionSi) {
-                partidoGroup.style.display = 'flex';
-                partidoInput.required = false;
-            } else {
-                partidoGroup.style.display = 'none';
-                // partidoInput.required = false;
-                // partidoInput.value = '';
-            }
-        }
-    </script>
+    <script type="module" src="src/js/vista/inscripcion.js"></script>
 </body>
 
 </html>

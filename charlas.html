@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charlas y Mapa - Autoridades de Mesa</title>
+    <link rel="stylesheet" href="src/styles/navbar.css">
+    <link rel="stylesheet" href="src/styles/card.css">
+    <link rel="stylesheet" href="src/styles/map.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-content">
+                <img src="src/resources/eleccion.png" alt="urna" width="40" height="40" class="navbar-logo">
+                <span class="navbar-text">Autoridades de Mesa</span>
+            </a>
+            <div class="navbar-buttons">
+                <a href="admin.html" class="btn-nav">Panel Administrador</a>
+                <a href="inscripcion.html" class="btn-nav">Inscribirse</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="card map-card">
+            <div class="card-conteiner">
+                <div class="card-header">
+                    <h2>SEDES DE CHARLAS DE ORIENTACIÓN</h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-text-muted" style="margin-top: 20px; padding: 0 20px;">
+                        Consulte las ubicaciones y horarios de las próximas charlas de orientación para autoridades de
+                        mesa. Seleccione una sede en la lista para ubicarla en el mapa.
+                    </p>
+
+                    <div class="map-layout">
+                        <div class="charlas-list" id="contenedor-charlas"></div>
+                        
+                        <div class="map-container">
+                            <div id="map"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script type="module" src="src/js/vista/charlas.js"></script>
+</body>
+
+</html>
