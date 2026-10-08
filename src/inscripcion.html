@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscripción - Autoridades de Mesa</title>
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/card.css">
+    <link rel="stylesheet" href="styles/form.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-content">
+                <img src="resources/eleccion.png" alt="urna" width="40" height="40" class="navbar-logo">
+                <span class="navbar-text">Autoridades de Mesa</span>
+            </a>
+            <div class="navbar-buttons">
+                <a href="#" class="btn-nav">Iniciar Sesión</a>
+                <a href="#" class="btn-nav">Registrarse</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="card form-card">
+            <div class="card-conteiner">
+                <div class="card-header">
+                    <h2>FORMULARIO DE INSCRIPCIÓN</h2>
+                </div>
+                <div class="card-body">
+                    <form action="#" method="POST" class="inscripcion-form">
+
+                        <fieldset>
+                            <legend>Datos Personales</legend>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="distrito">Distrito Electoral *</label>
+                                    <select id="distrito" name="distrito" required>
+                                        <option value="" disabled selected>Seleccione su distrito...</option>
+                                        <option value="CABA">Ciudad Autónoma de Buenos Aires</option>
+                                        <option value="BA">Buenos Aires</option>
+                                        <option value="CA">Catamarca</option>
+                                        <option value="CH">Chaco</option>
+                                        <option value="CU">Chubut</option>
+                                        <option value="CBA">Córdoba</option>
+                                        <option value="CR">Corrientes</option>
+                                        <option value="ER">Entre Ríos</option>
+                                        <option value="FO">Formosa</option>
+                                        <option value="JU">Jujuy</option>
+                                        <option value="LP">La Pampa</option>
+                                        <option value="LR">La Rioja</option>
+                                        <option value="MZ">Mendoza</option>
+                                        <option value="MI">Misiones</option>
+                                        <option value="NQ">Neuquén</option>
+                                        <option value="RN">Río Negro</option>
+                                        <option value="SA">Salta</option>
+                                        <option value="SJ">San Juan</option>
+                                        <option value="SL">San Luis</option>
+                                        <option value="SC">Santa Cruz</option>
+                                        <option value="SF">Santa Fe</option>
+                                        <option value="SE">Santiago del Estero</option>
+                                        <option value="TF">Tierra del Fuego</option>
+                                        <option value="TU">Tucumán</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="nombre">Nombre *</label>
+                                    <input type="text" id="nombre" name="nombre" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="apellido">Apellido *</label>
+                                    <input type="text" id="apellido" name="apellido" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="dni">DNI *</label>
+                                    <input type="number" id="dni" name="dni" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Correo Electrónico *</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Antecedentes y Experiencia</legend>
+                            <div class="form-group">
+                                <label>¿Fue autoridad de mesa anteriormente? *</label>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="fue_autoridad" value="si" required> Sí</label>
+                                    <label><input type="radio" name="fue_autoridad" value="no" required> No</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>¿Cumplió la capacitación para autoridades de mesa? *</label>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="capacitacion" value="si" required> Sí</label>
+                                    <label><input type="radio" name="capacitacion" value="no" required> No</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>¿Pertenece a una agrupación política? *</label>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="agrupacion" value="si" id="agrupacion-si" required
+                                            onchange="togglePartido()"> Sí</label>
+                                    <label><input type="radio" name="agrupacion" value="no" id="agrupacion-no" required
+                                            onchange="togglePartido()"> No</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="partido-group" style="display: none;">
+                                <label for="partido">Detalle el partido político: (Opcional)</label>
+                                <input type="text" id="partido" name="partido">
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Charlas de Orientación</legend>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="interes_charlas" name="interes_charlas" value="si">
+                                <label for="interes_charlas">Tengo interés en participar en charlas de
+                                    orientación</label>
+                            </div>
+                        </fieldset>
+
+                        <button type="submit" class="btn-submit">Enviar Postulación</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+
+        function togglePartido() {
+            var agrupacionSi = document.getElementById('agrupacion-si').checked;
+            var partidoGroup = document.getElementById('partido-group');
+            var partidoInput = document.getElementById('partido');
+
+            if (agrupacionSi) {
+                partidoGroup.style.display = 'flex';
+                partidoInput.required = false;
+            } else {
+                partidoGroup.style.display = 'none';
+                // partidoInput.required = false;
+                // partidoInput.value = '';
+            }
+        }
+    </script>
+</body>
+
+</html>
