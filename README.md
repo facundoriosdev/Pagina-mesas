@@ -16,8 +16,6 @@ Descomprimir el archivo `.zip`
 
 Abrir la terminal en la carpeta descomprimida
 
----
-
 Para iniciar el servidor local de desarrollo, ejecutar:
 
 npx serve
