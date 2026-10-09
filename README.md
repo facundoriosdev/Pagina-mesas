@@ -14,9 +14,7 @@ El prototipo no requiere configuración de claves. Incluye datos precargados en 
 
 Descomprimir el archivo `.zip`
 
-Instalar las dependencias del proyecto con un único comando en la terminal:
-
-npm install
+Abrir la terminal en la carpeta descomprimida
 
 ---
 
