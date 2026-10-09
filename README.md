@@ -20,10 +20,10 @@ Para iniciar el servidor local de desarrollo, ejecutar:
 
 npx serve
 
----
-
 La aplicación quedará abierta en el navegador en la dirección:
 http://localhost:3000 (o la URL local informada por la terminal).
+
+---
 
 
 ## Estructura del Proyecto
