@@ -41,6 +41,13 @@
     text-align: left;
 }
 
+.charla-item.activa {
+    border: 2px solid #0066ff !important;
+    box-shadow: 0 4px 14px rgba(0, 102, 255, 0.25);
+    background-color: #f8fbff;
+    transition: all 0.2s ease-in-out;
+}
+
 .charla-item:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     border-color: #0066ff;
