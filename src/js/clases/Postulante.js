@@ -5,6 +5,9 @@ export class Postulante {
         nombre,
         apellido,
         dni,
+        fechaNacimiento,
+        direccion,
+        telefono,
         email,
         fueAutoridad,
         capacitacion,
@@ -19,6 +22,9 @@ export class Postulante {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
+        this.fechaNacimiento = fechaNacimiento;
+        this.direccion = direccion;
+        this.telefono = telefono;
         this.email = email;
         this.fueAutoridad = fueAutoridad === true || fueAutoridad === 'si';
         this.capacitacion = capacitacion === true || capacitacion === 'si';

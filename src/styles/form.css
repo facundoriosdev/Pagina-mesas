@@ -1,7 +1,8 @@
 .form-card .card-conteiner {
     height: auto;
     padding-bottom: 20px;
-    width: 600px;
+    width: 700px;
+    margin: 0 auto 50px auto;
 }
 
 .inscripcion-form {
@@ -27,6 +28,8 @@
 .form-group input[type="text"],
 .form-group input[type="email"],
 .form-group input[type="number"],
+.form-group input[type="date"],
+.form-group input[type="tel"],
 .form-group select {
     padding: 10px;
     border: 1px solid #ccc;

@@ -32,7 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             tr.innerHTML = `
                 <td>${new Date(s.fechaRegistro).toLocaleDateString()}</td>
-                <td><strong>${s.apellido}, ${s.nombre}</strong><br><small style="color: #666;">${s.email}</small></td>
+                <td>
+                <strong>${s.apellido}, ${s.nombre}</strong>
+                <br><small style="color: #666;">${s.email}</small>
+                <br><small style="color: #666;">TEL: ${s.telefono}</small>
+                <br><small style="color: #666;">NAC: ${s.fechaNacimiento}</small>
+                </td>
                 <td>${s.dni}</td>
                 <td>${s.distrito}</td>
                 <td>${s.capacitacion ? 'Sí' : 'No'}</td>
