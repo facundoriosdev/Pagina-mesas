@@ -10,13 +10,25 @@ export class PostulacionServicio {
     }
 
     registrar(datos) {
-        if (!datos.distrito || !datos.nombre || !datos.apellido || !datos.dni || !datos.email) {
+        if (!datos.distrito || !datos.nombre || !datos.apellido || !datos.dni || !datos.fechaNacimiento || !datos.direccion || !datos.telefono || !datos.email) {
             throw new Error('Complete todos los campos obligatorios.');
         }
 
         const dniLimpio = datos.dni.toString().trim();
         if (dniLimpio.length < 7 || dniLimpio.length > 8 || isNaN(dniLimpio)) {
             throw new Error('El DNI debe contener 7 u 8 dígitos numéricos.');
+        }
+
+        const hoy = new Date();
+        const nacimiento = new Date(datos.fechaNacimiento);
+        const edad = hoy.getFullYear() - nacimiento.getFullYear();
+        const mes = hoy.getMonth() - nacimiento.getMonth();
+        const dia = hoy.getDate() - nacimiento.getDate();
+        if (mes < 0 || (mes === 0 && dia < 0)) {
+            edad--;
+        }
+        if (edad < 18) {
+            throw new Error('Debe ser mayor de 18 años para postularse como autoridad de mesa.');
         }
 
         const existentes = this.repo.obtenerTodas();
@@ -30,6 +42,9 @@ export class PostulacionServicio {
             nombre: datos.nombre.trim(),
             apellido: datos.apellido.trim(),
             dni: dniLimpio,
+            fechaNacimiento: datos.fechaNacimiento,
+            direccion: datos.direccion.trim(),
+            telefono: datos.telefono.trim(),
             email: datos.email.trim(),
             fueAutoridad: datos.fueAutoridad,
             capacitacion: datos.capacitacion,

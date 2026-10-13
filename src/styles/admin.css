@@ -16,6 +16,9 @@
 }
 
 .admin-box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: #0066ff;
     color: #ffffff;
     padding: 15px 20px;
@@ -25,6 +28,22 @@
     margin: 0;
     font-size: 1.15rem;
     letter-spacing: 0.5px;
+}
+
+.select-filtro {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid #ffffff;
+    font-size: 14px;
+    color: #000000;
+    background-color: #ffffff;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.select-filtro:hover {
+    background-color: #f8f9fa;
 }
 
 .admin-content {
