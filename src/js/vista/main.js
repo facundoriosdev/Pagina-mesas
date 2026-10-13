@@ -9,12 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const charlaService = new CharlaServicio(new CharlaDatos());
 
     const tbody = document.getElementById('tabla-solicitudes');
+    
+    let estadoFiltro = 'Todas';
 
     function renderizarTabla() {
 
         if (!tbody) return; 
 
-        const solicitudes = postulacionService.listarPostulaciones();
+        let solicitudes = postulacionService.listarPostulaciones();
+
+        if (estadoFiltro !== 'Todas') {
+            solicitudes = solicitudes.filter(s => s.estado === estadoFiltro);
+        }
+
         tbody.innerHTML = '';
 
         if (solicitudes.length === 0) {
@@ -151,5 +158,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         refrescarMapaAdmin();
     }
-  renderizarTabla();
+
+    const selectFiltro = document.getElementById('filtro-estado');
+    if (selectFiltro) {
+        selectFiltro.addEventListener('change', (e) => {
+            estadoFiltro = e.target.value;
+            renderizarTabla();
+        });
+    }
+
+    renderizarTabla();
 });
