@@ -1,4 +1,5 @@
 import { Postulante } from '../clases/Postulante.js';
+import { Evaluacion } from '../clases/Evaluacion.js';
 
 export class PostulacionServicio {
     constructor(postulacionDatos) {
@@ -57,10 +58,14 @@ export class PostulacionServicio {
         return nueva;
     }
 
-    cambiarEstado(id, estado) {
+    evaluarPostulante(id, estado, motivo = null) {
         if (!['Aprobada', 'Rechazada'].includes(estado)) {
             throw new Error('Estado inválido.');
         }
-        return this.repo.actualizarEstado(id, estado);
+        if (estado === 'Rechazada' && (!motivo || motivo.trim() === '')) {
+            throw new Error('Debe proporcionar un motivo para rechazar la solicitud.');
+        }
+        const nuevaEvaluacion = new Evaluacion(estado, motivo);
+        return this.repo.actualizarEstado(id, nuevaEvaluacion);
     }
 }
