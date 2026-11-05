@@ -19,7 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
         let solicitudes = postulacionService.listarPostulaciones();
 
         if (estadoFiltro !== 'Todas') {
-            solicitudes = solicitudes.filter(s => s.estado === estadoFiltro);
+            solicitudes = solicitudes.filter(s => {
+                const estadoActual = s.evaluacion ? s.evaluacion.estado : 'Pendiente';
+                return estadoActual === estadoFiltro;
+            });
         }
 
         tbody.innerHTML = '';
@@ -32,10 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         solicitudes.forEach(s => {
             const tr = document.createElement('tr');
+            const estadoActual = s.evaluacion ? s.evaluacion.estado : 'Pendiente';
             
             let badgeClase = 'badge-pendiente';
-            if (s.estado === 'Aprobada') badgeClase = 'badge-aprobada';
-            if (s.estado === 'Rechazada') badgeClase = 'badge-rechazada';
+            if (estadoActual === 'Aprobada') badgeClase = 'badge-aprobada';
+            if (estadoActual === 'Rechazada') badgeClase = 'badge-rechazada';
 
             tr.innerHTML = `
                 <td>${new Date(s.fechaRegistro).toLocaleDateString()}</td>
@@ -52,9 +56,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <!-- Columna de Agrupación que evalúa el booleano e imprime el partido -->
                 <td>${s.agrupacion ? `Sí <br><small style="color: #666;">(${s.partido || 'Sin detallar'})</small>` : 'No'}</td>
                 
-                <td><span class="badge ${badgeClase}">${s.estado}</span></td>
+                <td><span class="badge ${badgeClase}">${estadoActual}</span></td>
                 <td>
-                    ${s.estado === 'Pendiente' ? `
+                    ${estadoActual === 'Pendiente' ? `
                         <button class="btn-accion btn-aprobar" data-id="${s.id}">Aprobar</button>
                         <button class="btn-accion btn-rechazar" data-id="${s.id}">Rechazar</button>
                     ` : '<small style="color: #888;">Procesada</small>'}
@@ -65,15 +69,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.querySelectorAll('.btn-aprobar').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                postulacionService.cambiarEstado(Number(e.target.dataset.id), 'Aprobada');
-                renderizarTabla();
+                const id = Number(e.target.dataset.id);
+                try{
+                    postulacionService.evaluarPostulante(id, 'Aprobada');
+                    renderizarTabla();
+                }
+                catch (error) {
+                    alert(error.message);
+                }
             });
         });
 
         document.querySelectorAll('.btn-rechazar').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                postulacionService.cambiarEstado(Number(e.target.dataset.id), 'Rechazada');
-                renderizarTabla();
+                const id = Number(e.target.dataset.id);
+                const motivo = prompt('Ingrese el motivo de rechazo:');
+                if(motivo !== null) {
+                    try{
+                        postulacionService.evaluarPostulante(id, 'Rechazada', motivo);
+                        renderizarTabla();
+                    } catch (error) {
+                        alert(error.message);
+                    }
+                }   
+               
             });
         });
     }

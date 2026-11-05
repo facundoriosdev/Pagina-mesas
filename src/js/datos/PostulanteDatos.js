@@ -19,11 +19,11 @@ export class PostulanteDatos {
         localStorage.setItem(this.STORAGE_KEY, JSON.stringify(postulaciones));
     }
 
-    actualizarEstado(id, nuevoEstado) {
+    actualizarEstado(id, evaluacion) {
         const lista = this.obtenerTodas();
         const post = lista.find(p => p.id === id);
         if (post) {
-            post.estado = nuevoEstado;
+            post.evaluacion = evaluacion;
             localStorage.setItem(this.STORAGE_KEY, JSON.stringify(lista));
             return post;
         }

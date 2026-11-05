@@ -14,7 +14,7 @@ export class Postulante {
         agrupacion,
         partido = '',
         interesCharlas = false,
-        estado = 'Pendiente',
+        evaluacion = null,
         fechaRegistro = new Date().toISOString()
     }) {
         this.id = id;
@@ -31,7 +31,7 @@ export class Postulante {
         this.agrupacion = agrupacion === true || agrupacion === 'si';
         this.partido = partido;
         this.interesCharlas = Boolean(interesCharlas);
-        this.estado = estado;
+        this.evaluacion = evaluacion;
         this.fechaRegistro = fechaRegistro;
     }
 }
